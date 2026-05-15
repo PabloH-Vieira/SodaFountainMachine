@@ -1,0 +1,101 @@
+------------------------------------------------------------
+Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1100mV 85C Model Setup 'clock'
+Slack : -4.269
+TNS   : -37.925
+
+Type  : Slow 1100mV 85C Model Setup 'debouncer:inst|outb'
+Slack : -1.584
+TNS   : -12.842
+
+Type  : Slow 1100mV 85C Model Hold 'clock'
+Slack : 0.424
+TNS   : 0.000
+
+Type  : Slow 1100mV 85C Model Hold 'debouncer:inst|outb'
+Slack : 0.745
+TNS   : 0.000
+
+Type  : Slow 1100mV 85C Model Minimum Pulse Width 'clock'
+Slack : -0.538
+TNS   : -14.179
+
+Type  : Slow 1100mV 85C Model Minimum Pulse Width 'debouncer:inst|outb'
+Slack : -0.538
+TNS   : -7.996
+
+Type  : Slow 1100mV 0C Model Setup 'clock'
+Slack : -4.395
+TNS   : -37.763
+
+Type  : Slow 1100mV 0C Model Setup 'debouncer:inst|outb'
+Slack : -1.578
+TNS   : -12.708
+
+Type  : Slow 1100mV 0C Model Hold 'clock'
+Slack : 0.436
+TNS   : 0.000
+
+Type  : Slow 1100mV 0C Model Hold 'debouncer:inst|outb'
+Slack : 0.710
+TNS   : 0.000
+
+Type  : Slow 1100mV 0C Model Minimum Pulse Width 'clock'
+Slack : -0.538
+TNS   : -14.211
+
+Type  : Slow 1100mV 0C Model Minimum Pulse Width 'debouncer:inst|outb'
+Slack : -0.538
+TNS   : -7.925
+
+Type  : Fast 1100mV 85C Model Setup 'clock'
+Slack : -2.477
+TNS   : -9.461
+
+Type  : Fast 1100mV 85C Model Setup 'debouncer:inst|outb'
+Slack : -0.711
+TNS   : -4.416
+
+Type  : Fast 1100mV 85C Model Hold 'clock'
+Slack : 0.198
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Hold 'debouncer:inst|outb'
+Slack : 0.272
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Minimum Pulse Width 'clock'
+Slack : -0.354
+TNS   : -2.014
+
+Type  : Fast 1100mV 85C Model Minimum Pulse Width 'debouncer:inst|outb'
+Slack : 0.102
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Setup 'clock'
+Slack : -2.045
+TNS   : -7.629
+
+Type  : Fast 1100mV 0C Model Setup 'debouncer:inst|outb'
+Slack : -0.568
+TNS   : -3.586
+
+Type  : Fast 1100mV 0C Model Hold 'clock'
+Slack : 0.187
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Hold 'debouncer:inst|outb'
+Slack : 0.251
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Minimum Pulse Width 'clock'
+Slack : -0.347
+TNS   : -2.021
+
+Type  : Fast 1100mV 0C Model Minimum Pulse Width 'debouncer:inst|outb'
+Slack : 0.119
+TNS   : 0.000
+
+------------------------------------------------------------

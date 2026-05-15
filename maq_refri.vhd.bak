@@ -1,0 +1,114 @@
+ENTITY maq_refri IS
+    PORT (
+        Clock       : IN  bit;
+        Reset       : IN  bit;
+        Cinco       : IN  bit;
+        Dez         : IN  bit;
+        Coca        : IN  bit;
+        Fanta       : IN  bit;
+        DevTotal    : IN  bit;
+        EstadoAtual : OUT bit_vector(13 downto 0);
+        Saida       : OUT bit_vector(13 downto 0)
+    );
+END maq_refri;
+
+ARCHITECTURE Behavior OF maq_refri IS
+
+    TYPE State_type IS (O, V, X, XV, XX, XXV);
+    TYPE Exit_type  IS (esperar, troco, dev_total, coca_saida, fanta_saida);
+
+    SIGNAL Estado      : State_type := O;
+    SIGNAL ProxEstado  : State_type;
+    SIGNAL Saida_Trans : Exit_type;
+
+BEGIN
+
+    PROCESS (Clock, Reset)
+    BEGIN
+        IF Reset = '1' THEN
+            Estado <= O;
+        ELSIF Clock = '1' THEN  
+            Estado <= ProxEstado;
+        END IF;
+    END PROCESS;
+
+    PROCESS (Estado, Cinco, Dez, Coca, Fanta, DevTotal)
+    BEGIN
+        Saida_Trans <= esperar;
+        ProxEstado  <= Estado;
+
+        IF DevTotal = '1' THEN
+            Saida_Trans <= dev_total;
+            ProxEstado <= O;
+        END IF;
+
+        CASE Estado IS
+				
+            WHEN O =>
+                IF Cinco = '1' THEN
+                    ProxEstado <= V;
+                ELSIF Dez = '1' THEN
+                    ProxEstado <= X;
+                END IF;
+
+            WHEN V =>
+                IF Cinco = '1' THEN
+                    ProxEstado <= X;
+                ELSIF Dez = '1' THEN
+                    ProxEstado <= XV;
+                END IF;
+
+            WHEN X =>
+                IF Cinco = '1' THEN
+                    ProxEstado <= XV;
+                ELSIF Dez = '1' THEN
+                    ProxEstado <= XX;
+                END IF;
+
+            WHEN XV =>
+                IF Cinco = '1' THEN
+                    ProxEstado <= XX;
+                ELSIF Dez = '1' THEN
+                    ProxEstado <= XXV;
+                END IF;
+
+            WHEN XX =>
+                IF Cinco = '1' THEN
+                    ProxEstado <= XXV;
+                ELSIF Dez = '1' THEN
+                    ProxEstado <= XXV;
+                    Saida_Trans <= troco;
+                END IF;
+					 
+            WHEN XXV =>
+                IF Cinco = '1' THEN
+                    ProxEstado <= XXV;
+                ELSIF Dez = '1' THEN
+                    ProxEstado <= XXV;
+                    Saida_Trans <= troco;
+                END IF;
+
+                IF Coca = '1' THEN
+                    Saida_Trans <= coca_saida;
+                    ProxEstado <= O;
+                ELSIF Fanta = '1' THEN
+                    Saida_Trans <= fanta_saida;
+                    ProxEstado <= O;
+                END IF;
+
+        END CASE;
+    END PROCESS;
+
+    Saida <= "01100011101000" WHEN Saida_Trans = troco ELSE
+             "01110001000010" WHEN Saida_Trans = dev_total ELSE
+             "01110000001000" WHEN Saida_Trans = fanta_saida ELSE
+             "01100010000001" WHEN Saida_Trans = coca_saida ELSE
+             "11101111110111";  
+
+    EstadoAtual <= "00100100100100" WHEN ProxEstado = XXV ELSE
+                    "00000010100100" WHEN ProxEstado = V ELSE
+                    "10011110000001" WHEN ProxEstado = X ELSE 
+                    "10011110100100" WHEN ProxEstado = XV ELSE
+                    "00100100000001" WHEN ProxEstado = XX ELSE
+                    "00000010000001";
+END Behavior;

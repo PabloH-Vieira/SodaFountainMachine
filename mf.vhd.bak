@@ -1,0 +1,141 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+USE ieee.numeric_std.all;
+
+ENTITY mealy IS
+    PORT (
+        Clock     : IN  std_logic;
+        Reset     : IN  std_logic;
+        Cinco     : IN  std_logic;   -- moeda 5
+        Dez       : IN  std_logic;   -- moeda 10
+        Coca      : IN  std_logic;
+        Fanta     : IN  std_logic;
+        DevTotal  : IN  std_logic;
+        EstadoAtual : OUT std_logic_vector(2 downto 0);
+        Saida       : OUT std_logic_vector(2 downto 0)  -- saida mealy
+    );
+END mealy;
+
+
+ARCHITECTURE Behavior OF mealy IS
+
+    -----------------------------------------------------------------------
+    -- Definição dos estados
+    -----------------------------------------------------------------------
+    TYPE State_type IS (O, V, X, XV, XX, XXV);
+    TYPE Exit_type  IS (esperar, troco, dev_total, coca_saida, fanta_saida);
+
+    SIGNAL Estado         : State_type := O;
+    SIGNAL Saida_Trans    : Exit_type  := esperar;
+
+BEGIN
+
+    -----------------------------------------------------------------------
+    -- Processo síncrono (máquina de estados Mealy)
+    -----------------------------------------------------------------------
+    PROCESS (Clock, Reset)
+    BEGIN
+
+        IF Reset = '1' THEN
+            Estado      <= O;
+            Saida_Trans <= esperar;
+
+        ELSIF rising_edge(Clock) THEN
+
+            CASE Estado IS
+
+                ----------------------------------------------------------------
+                -- Estado 0 → nenhum crédito
+                ----------------------------------------------------------------
+                WHEN O =>
+                    IF Cinco = '1' THEN
+                        Estado      <= V;
+                        Saida_Trans <= esperar;
+
+                    ELSIF Dez = '1' THEN
+                        Estado      <= X;
+                        Saida_Trans <= esperar;
+                    END IF;
+
+                ----------------------------------------------------------------
+                -- Estado 5 → 5 unidades
+                ----------------------------------------------------------------
+                WHEN V =>
+                    IF Cinco = '1' THEN
+                        Estado      <= X;
+                    ELSIF Dez = '1' THEN
+                        Estado      <= XV;
+                    END IF;
+
+                ----------------------------------------------------------------
+                -- Estado 10
+                ----------------------------------------------------------------
+                WHEN X =>
+                    IF Cinco = '1' THEN
+                        Estado <= XV;
+                    ELSIF Dez = '1' THEN
+                        Estado <= XX;
+                    END IF;
+
+                ----------------------------------------------------------------
+                -- Estado 15
+                ----------------------------------------------------------------
+                WHEN XV =>
+                    IF Coca = '1' THEN
+                        Saida_Trans <= coca_saida;
+                        Estado <= O;
+
+                    ELSIF Fanta = '1' THEN
+                        Saida_Trans <= fanta_saida;
+                        Estado <= O;
+                    ELSIF Cinco = '1' THEN
+                        Estado <= XX;
+                    ELSIF Dez = '1' THEN
+                        Estado <= XXV;
+                    END IF;
+
+                ----------------------------------------------------------------
+                -- Estado 20
+                ----------------------------------------------------------------
+                WHEN XX =>
+                    IF Coca = '1' THEN
+                        Saida_Trans <= coca_saida;
+                        Estado <= Cinco;  -- sobra 5
+                    ELSIF Fanta = '1' THEN
+                        Saida_Trans <= fanta_saida;
+                        Estado <= Cinco;
+                    END IF;
+
+                ----------------------------------------------------------------
+                -- Estado 25
+                ----------------------------------------------------------------
+                WHEN XXV =>
+                    IF Coca = '1' THEN
+                        Saida_Trans <= coca_saida;
+                        Estado <= Dez;
+                    ELSIF Fanta = '1' THEN
+                        Saida_Trans <= fanta_saida;
+                        Estado <= Dez;
+                    ELSIF DevTotal = '1' THEN
+                        Saida_Trans <= dev_total;
+                        Estado <= O;
+                    END IF;
+
+            END CASE;
+
+        END IF;
+
+    END PROCESS;
+
+
+    -----------------------------------------------------------------------
+    -- Conversão do estado enumerado para saída (apenas para debug)
+    -----------------------------------------------------------------------
+    EstadoAtual <= std_logic_vector(to_unsigned(State_type'pos(Estado), 3));
+
+    -----------------------------------------------------------------------
+    -- Saída da máquina tipo Mealy
+    -----------------------------------------------------------------------
+    Saida <= std_logic_vector(to_unsigned(Exit_type'pos(Saida_Trans), 3));
+
+END Behavior;

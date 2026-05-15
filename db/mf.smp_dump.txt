@@ -1,0 +1,17 @@
+
+State Machine - |mf|maq_refri:inst2|Saida_Trans
+Name Saida_Trans.fanta_saida Saida_Trans.coca_saida Saida_Trans.dev_total Saida_Trans.troco Saida_Trans.esperar 
+Saida_Trans.esperar 0 0 0 0 0 
+Saida_Trans.troco 0 0 0 1 1 
+Saida_Trans.dev_total 0 0 1 0 1 
+Saida_Trans.coca_saida 0 1 0 0 1 
+Saida_Trans.fanta_saida 1 0 0 0 1 
+
+State Machine - |mf|maq_refri:inst2|Estado
+Name Estado.XXV Estado.XX Estado.XV Estado.X Estado.V Estado.O 
+Estado.O 0 0 0 0 0 0 
+Estado.V 0 0 0 0 1 1 
+Estado.X 0 0 0 1 0 1 
+Estado.XV 0 0 1 0 0 1 
+Estado.XX 0 1 0 0 0 1 
+Estado.XXV 1 0 0 0 0 1 

@@ -1,0 +1,125 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "display_estado_0_1",
+					"strict" : false
+				},
+				{
+					"name" : "display_estado_0_4",
+					"strict" : false
+				},
+				{
+					"name" : "display_estado_0_6",
+					"strict" : false
+				},
+				{
+					"name" : "display_estado_1_0",
+					"strict" : false
+				},
+				{
+					"name" : "display_estado_1_2",
+					"strict" : false
+				},
+				{
+					"name" : "display_estado_1_3",
+					"strict" : false
+				},
+				{
+					"name" : "display_estado_1_4",
+					"strict" : false
+				},
+				{
+					"name" : "display_estado_1_5",
+					"strict" : false
+				},
+				{
+					"name" : "display_estado_1_6",
+					"strict" : false
+				},
+				{
+					"name" : "display_saida_0_0",
+					"strict" : false
+				},
+				{
+					"name" : "display_saida_0_1",
+					"strict" : false
+				},
+				{
+					"name" : "display_saida_0_2",
+					"strict" : false
+				},
+				{
+					"name" : "display_saida_0_3",
+					"strict" : false
+				},
+				{
+					"name" : "display_saida_0_4",
+					"strict" : false
+				},
+				{
+					"name" : "display_saida_0_5",
+					"strict" : false
+				},
+				{
+					"name" : "display_saida_0_6",
+					"strict" : false
+				},
+				{
+					"name" : "display_saida_1_0",
+					"strict" : false
+				},
+				{
+					"name" : "display_saida_1_3",
+					"strict" : false
+				},
+				{
+					"name" : "display_saida_1_4",
+					"strict" : false
+				},
+				{
+					"name" : "display_saida_1_5",
+					"strict" : false
+				},
+				{
+					"name" : "display_saida_1_6",
+					"strict" : false
+				},
+				{
+					"name" : "dev_total",
+					"strict" : false
+				},
+				{
+					"name" : "coca",
+					"strict" : false
+				},
+				{
+					"name" : "fanta",
+					"strict" : false
+				},
+				{
+					"name" : "cinco",
+					"strict" : false
+				},
+				{
+					"name" : "dez",
+					"strict" : false
+				},
+				{
+					"name" : "reset",
+					"strict" : false
+				},
+				{
+					"name" : "clock_btn",
+					"strict" : false
+				},
+				{
+					"name" : "clock",
+					"strict" : false
+				}
+			]
+		}
+	]
+}
