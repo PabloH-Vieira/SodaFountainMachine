@@ -43,16 +43,13 @@ The system operates across six distinct states, which represent the current cred
 
 ## Technical Implementation
 
-* 
-**Language:** VHDL.
+* **Language:** VHDL.
 
 
-* 
-**Design and Simulation Software:** Intel Quartus II.
+* **Design and Simulation Software:** Intel Quartus II.
 
 
-* 
-**Code Structure:** The VHDL implementation utilizes a standard two-process methodology: one synchronous process responsible for updating the current state, and one combinational process dedicated to calculating the next-state logic and the respective outputs. Because of the Mealy architecture, the soda output is triggered in the exact same clock cycle that the purchase condition is satisfied, avoiding the latency of an additional cycle.
+* **Code Structure:** The VHDL implementation utilizes a standard two-process methodology: one synchronous process responsible for updating the current state, and one combinational process dedicated to calculating the next-state logic and the respective outputs. Because of the Mealy architecture, the soda output is triggered in the exact same clock cycle that the purchase condition is satisfied, avoiding the latency of an additional cycle.
 
 
 
